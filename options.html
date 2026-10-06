@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Post Genie Settings</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="options">
+    <main>
+      <header class="options-head">
+        <img src="icons/icon48.png" alt="" width="40" height="40" />
+        <div>
+          <h1>Post Genie Settings</h1>
+          <p class="muted">Tell the AI who you are so every post sounds like an expert in your field.</p>
+        </div>
+      </header>
+
+      <form id="settings-form">
+        <section class="card">
+          <h2>Your profile</h2>
+          <div class="grid">
+            <label class="field"><span>Name</span><input name="profile.name" placeholder="Jane Doe" /></label>
+            <label class="field"><span>Current role / headline</span><input name="profile.role" placeholder="Senior Security Engineer | AI Red Teaming" /></label>
+            <label class="field"><span>Your field *</span><input name="profile.field" placeholder="Cybersecurity, Cloud, Data Engineering, Fintech…" required /></label>
+            <label class="field"><span>Experience</span><input name="profile.experience" placeholder="7 years building secure ML platforms" /></label>
+          </div>
+          <label class="field"><span>Key skills</span><input name="profile.skills" placeholder="LLM security, threat modeling, Python, AWS, Kubernetes" /></label>
+          <label class="field">
+            <span>News keywords for your field <em class="muted">(comma-separated, defaults to your field)</em></span>
+            <input name="profile.newsKeywords" placeholder="cybersecurity, zero trust, cloud security, SOC" />
+          </label>
+          <label class="field"><span>Who should notice you?</span><input name="profile.audience" /></label>
+          <label class="field"><span>What do you want from posting?</span><input name="profile.goal" /></label>
+          <label class="field">
+            <span>Tone</span>
+            <select name="profile.tone">
+              <option value="insightful">Insightful and analytical</option>
+              <option value="confident and direct">Confident and direct</option>
+              <option value="friendly and conversational">Friendly and conversational</option>
+              <option value="visionary and forward-looking">Visionary and forward-looking</option>
+              <option value="practical and no-nonsense">Practical and no-nonsense</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="card">
+          <h2>AI provider</h2>
+          <p class="muted small">Your key is stored only in this browser (chrome.storage.local) and sent only to the provider you pick.</p>
+          <div class="grid">
+            <label class="field">
+              <span>Provider</span>
+              <select name="ai.provider" id="provider">
+                <option value="openai">OpenAI (or OpenAI-compatible)</option>
+                <option value="anthropic">Anthropic Claude</option>
+                <option value="gemini">Google Gemini</option>
+              </select>
+            </label>
+            <label class="field"><span>Model</span><input name="ai.model" id="model" /></label>
+          </div>
+          <label class="field"><span>API key</span><input name="ai.apiKey" type="password" autocomplete="off" placeholder="sk-…" /></label>
+          <label class="field" id="base-url-field">
+            <span>Base URL <em class="muted">(optional: OpenRouter, Groq, Ollama, Azure… leave blank for OpenAI)</em></span>
+            <input name="ai.baseUrl" placeholder="https://openrouter.ai/api/v1" />
+          </label>
+          <button type="button" id="test-ai" class="btn btn-small">Test connection</button>
+          <span id="test-result" class="small"></span>
+        </section>
+
+        <section class="card">
+          <h2>Post preferences</h2>
+          <div class="grid">
+            <label class="field">
+              <span>Length</span>
+              <select name="post.length">
+                <option value="short">Short (600-900 chars)</option>
+                <option value="medium">Medium (1000-1600 chars)</option>
+                <option value="long">Long (1700-2500 chars)</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Emojis</span>
+              <select name="post.emojis">
+                <option value="none">None</option>
+                <option value="few">A few</option>
+                <option value="more">More</option>
+              </select>
+            </label>
+            <label class="field"><span>Hashtags</span><input name="post.hashtags" type="number" min="0" max="10" /></label>
+            <label class="field"><span>Variants per run</span><input name="post.variants" type="number" min="1" max="5" /></label>
+            <label class="field"><span>Language</span><input name="post.language" /></label>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <h2>News feeds</h2>
+            <div>
+              <button type="button" id="add-feed" class="btn btn-small">+ Add RSS feed</button>
+              <button type="button" id="reset-feeds" class="btn btn-ghost btn-small">Reset to defaults</button>
+            </div>
+          </div>
+          <p class="muted small">A Google News feed for your field keywords is added automatically.</p>
+          <table class="feeds">
+            <thead>
+              <tr><th>On</th><th>Name</th><th>Category</th><th>RSS URL</th><th></th></tr>
+            </thead>
+            <tbody id="feeds-body"></tbody>
+          </table>
+        </section>
+
+        <div class="save-bar">
+          <button type="submit" class="btn btn-primary">Save settings</button>
+          <span id="save-status" class="small"></span>
+        </div>
+      </form>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LinkedIn Post Genie</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="panel">
+    <header class="topbar">
+      <div class="brand">
+        <img src="icons/icon32.png" alt="" width="22" height="22" />
+        <span>Post Genie</span>
+      </div>
+      <button id="open-settings" class="icon-btn" title="Settings" aria-label="Settings">⚙</button>
+    </header>
+
+    <div id="setup-banner" class="banner" hidden>
+      <strong>Finish setup:</strong> add your field and an AI API key so posts match your profile.
+      <button id="setup-btn" class="btn btn-small">Open settings</button>
+    </div>
+
+    <section class="card">
+      <div class="section-head">
+        <h2><span class="step">1</span> Pick today's news</h2>
+        <button id="refresh-news" class="btn btn-ghost btn-small">↻ Refresh</button>
+      </div>
+      <div id="category-chips" class="chips"></div>
+      <input id="news-search" type="search" placeholder="Filter headlines…" />
+      <p id="news-status" class="muted small"></p>
+      <ul id="news-list" class="news-list"></ul>
+      <details class="topic-box">
+        <summary>…or write about your own idea</summary>
+        <textarea id="custom-topic" rows="3" placeholder="e.g. What I learned securing our RAG pipeline against prompt injection"></textarea>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2><span class="step">2</span> Choose an angle</h2>
+      <div id="selected-list" class="selected-list"></div>
+      <label class="field">
+        <span>Post style</span>
+        <select id="post-type"></select>
+      </label>
+      <label class="field">
+        <span>Extra instructions <em class="muted">(optional)</em></span>
+        <input id="notes" type="text" placeholder="e.g. mention my work in fintech, keep it under 1000 chars" />
+      </label>
+      <button id="generate" class="btn btn-primary btn-block">✨ Generate posts</button>
+    </section>
+
+    <section id="results-section" class="card" hidden>
+      <div class="section-head">
+        <h2><span class="step">3</span> Review &amp; post</h2>
+        <button id="clear-results" class="btn btn-ghost btn-small">Clear</button>
+      </div>
+      <p class="muted small">Edit freely. Add a personal detail before posting, because real experience is what makes leaders reach out.</p>
+      <div id="results"></div>
+    </section>
+
+    <div id="toast" class="toast" hidden></div>
+
+    <script type="module" src="sidepanel.js"></script>
+  </body>
+</html>
